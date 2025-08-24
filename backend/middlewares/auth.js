@@ -4,7 +4,7 @@ const userAuth = async (req, res, next) => {
     const {token} = req.headers;
 
     if(!token){
-        console.log(error)
+        console.log("token error")
         res.json({success: false, message: "Not Authored Login Again"});
 
     }
@@ -13,8 +13,7 @@ const userAuth = async (req, res, next) => {
         const tokenDecode = jwt.verify(token, process.env.JWT_SECRET);
 
         if(tokenDecode.id){
-            
-            req.body.userId = tokenDecode.id;
+            req.userId = tokenDecode.id;
             
         }
         else{
